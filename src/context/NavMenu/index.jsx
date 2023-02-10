@@ -1,13 +1,15 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
-export const NavMenuContext = createContext();
+const NavMenuContext = createContext();
+export const useNavMenuContext = () => useContext(NavMenuContext);
 
 export const NavMenuContextProvider = ({ children }) => {
   const [openNavMenu, setOpenNavMenu] = useState(false);
+
   return (
-    <NavMenu.Provider value={[openNavMenu, setOpenNavMenu]}>
+    <NavMenuContext.Provider value={[openNavMenu, setOpenNavMenu]}>
       {children}
-    </NavMenu.Provider>
+    </NavMenuContext.Provider>
   )
 }
 

@@ -58,3 +58,9 @@ section {
   --primary-black: #212245;
   --primary-red: crimson;
 }
+
+@media (max-width: 428px) {
+  .ant-drawer-content-wrapper {
+    width: 250px !important;
+  }
+}

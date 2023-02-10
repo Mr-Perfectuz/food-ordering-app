@@ -12,7 +12,6 @@ const Nav = styled.nav`
   margin: auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  border: 1px solid red;
 
   @media (max-width: 1280px) {
     padding: 0 116px;
@@ -37,7 +36,6 @@ const Nav = styled.nav`
 `
 
 Nav.Column = styled.div`
-  border: 1px solid;
   display: flex;
   align-items: center;
   justify-content: center;

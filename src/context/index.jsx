@@ -1,8 +1,18 @@
 import React from 'react'
+import CartDrawerContextProvider from './CartDrawerProvider'
 import NavMenuContextProvider from './NavMenu'
+import ProductContextProvider from './Products'
 
-export const Context = () => {
+
+export const Context = ({ children }) => {
   return (
-    <NavMenuContextProvider>{children}</NavMenuContextProvider>
+    <NavMenuContextProvider>
+      <CartDrawerContextProvider>
+        <ProductContextProvider>
+          {children}
+
+        </ProductContextProvider>
+      </CartDrawerContextProvider>
+    </NavMenuContextProvider>
   )
 }

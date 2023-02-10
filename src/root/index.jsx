@@ -11,8 +11,11 @@ function Root() {
 
         {
           navbar?.map((navlink) => {
-            return <Route key={navlink?.id} path={navlink?.path} element={navlink?.element} />
-            // navlink?.isPrivate ? <Navigate to='/login' /> :
+            return navlink?.isPrivate
+              ?
+              <Route key={navlink?.id} path={navlink?.path} element={localStorage.getItem('tokenFood') ? navlink?.element : <Navigate to='/login' />} />
+              :
+              <Route key={navlink?.id} path={navlink?.path} element={navlink?.element} />
           })
         }
 
@@ -21,5 +24,4 @@ function Root() {
     </Routes>
   )
 }
-
 export default Root

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
 import { Nav, Container, Wrapper, Logo, Icons } from './style'
 
@@ -19,24 +19,28 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { useMediaQuery } from '../../hooks/useMediaQuery'
 
 // import drawer from ant design
-import { Button, Drawer } from 'antd';
+import { Drawer } from 'antd';
 import NavMenu from './NavMenu'
+import { NavMenuContext, useNavMenuContext } from '../../context/NavMenu'
+
+// import CartDrawer
+import CartDrawer from '../Cart/CartDrawer';
+
+// import CartDrawerContext
+import { useCartDrawer } from '../../context/CartDrawerProvider'
 
 
 const Navbar = () => {
   const navigate = useNavigate();
   let isPageWide = useMediaQuery('(max-width: 884px)');
 
-  // drawer
-  const [open, setOpen] = useState(false);
+  // NavMenuContext
+  const [openNavMenu, setOpenNavMenu] = useNavMenuContext();
 
-  const showDrawer = () => {
-    setOpen(true);
-  };
 
-  const onClose = () => {
-    setOpen(false);
-  };
+  // cart drawer
+  const [openCartDrawer, setOpenCartDrawer] = useCartDrawer();
+
 
   return (
     <Container>
@@ -83,11 +87,11 @@ const Navbar = () => {
 
             <IconButton aria-label="cart">
               <Badge badgeContent={4} color="error">
-                <ShoppingCartIcon onClick={showDrawer} />
+                <ShoppingCartIcon onClick={() => setOpenCartDrawer(!openCartDrawer)} />
               </Badge>
-              <PermIdentityIcon />
+              <PermIdentityIcon onClick={() => navigate('/login')} />
               {
-                isPageWide && <MenuIcon color='sction' />
+                isPageWide && <MenuIcon color='sction' onClick={() => setOpenNavMenu(!openNavMenu)} />
               }
             </IconButton>
 
@@ -96,16 +100,12 @@ const Navbar = () => {
       </Nav>
       <Wrapper>
 
-        <Drawer title="Basic Drawer" placement="right" onClose={onClose} open={open}>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-          <p>Some contents...</p>
-        </Drawer>
+        <CartDrawer />
         <NavMenu />
 
-        <Outlet />
-        <FoodPage />
       </Wrapper>
+      <Outlet />
+      <FoodPage />
     </Container>
   )
 }

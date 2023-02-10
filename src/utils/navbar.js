@@ -53,7 +53,7 @@ export const navbar = [
     title: 'Register',
     path: '/register',
     element: <Register />,
-    isPrivate: true,
+    isPrivate: false,
     hidden: true,
   },
   {

@@ -1,22 +1,18 @@
-import React, { useContext, useState } from 'react'
-import { Button, Drawer } from 'antd';
-import { NavMenuContext } from '../../../context/NavMenu';
+import React from 'react'
+import { Drawer } from 'antd';
+import { useNavMenuContext } from '../../../context/NavMenu';
+
+
 
 const NavMenu = () => {
-  const [openNavMenu, setOpenNavMenu] = useContext(NavMenuContext)
-
-  const showDrawer = () => {
-    openNavMenu(true);
-  };
+  const [openNavMenu, setOpenNavMenu] = useNavMenuContext()
 
   const onClose = () => {
-    openNavMenu(false);
+    setOpenNavMenu(false);
   };
   return (
     <Drawer title="Basic Drawer" placement="right" onClose={onClose} open={openNavMenu}>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
-      <p>Some contents...</p>
+      <p>NavMenu</p>
     </Drawer>
   )
 }
